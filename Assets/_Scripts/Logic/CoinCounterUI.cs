@@ -9,6 +9,7 @@ public class CoinCounterUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI toUpdate;
     [SerializeField] private Transform coinTextContainer;
     [SerializeField] private float duration = 0.4f;
+    [SerializeField] private Ease animationCurve;
     private float containerInitPosition;
     private float moveAmount;
     void Start()
@@ -28,7 +29,7 @@ public class CoinCounterUI : MonoBehaviour
 
     public void UpdateScore(int score) {
         toUpdate.SetText($"{score}");
-        coinTextContainer.DOLocalMoveY(containerInitPosition + moveAmount, duration);
+        coinTextContainer.DOLocalMoveY(containerInitPosition + moveAmount, duration).SetEase(animationCurve);
         StartCoroutine(ResetCoinContainer(score));
     }
     private IEnumerator ResetCoinContainer(int score) {
